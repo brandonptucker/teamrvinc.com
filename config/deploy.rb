@@ -18,7 +18,7 @@ role :app, "#{application}"                          # This may be the same as y
 role :db,  "#{application}", :primary => true # This is where Rails migrations will run
 
 set :deploy_to, "/var/www/#{user}/data/www/#{application}"
-set :deploy_via, :remote_cache
+set :deploy_via, :copy
 
 # if you want to clean up old releases on each deploy uncomment this:
 after "deploy:restart", "deploy:cleanup"
