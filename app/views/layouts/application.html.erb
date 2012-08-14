@@ -26,9 +26,12 @@
           </a>
           <a class="brand" href="#">Team RV</a>
           <div class="container nav-collapse">
-            <ul class="nav">
+            <ul class="nav pull-right">
               <li><%= link_to "Home", root_url  %></li>
               <li><%= link_to "Contact", contact_path  %></li>
+              <% if logged_in? %>
+                <li><%= link_to "Logout", logout_path, method: "delete" %></li>
+              <% end %>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
