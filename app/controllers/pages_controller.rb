@@ -14,7 +14,7 @@ class PagesController < ApplicationController
       redirect_to contact_path
     else
       if @contact_message.errors.any?
-        flash[:error] = "Sorry, the message could not be sent. Please correct the errors below and submit the message again."
+        flash[:error] = "Sorry, the message could not be sent! Please correct the errors below and submit the message again."
       end
       render :action => "contact"
     end
