@@ -46,7 +46,7 @@
       </div>
       <div class="control-group <%= @contact_message.errors.has_key?(:message) ? "error": "" %>">
         <%= f.label :message %>
-        <%= f.text_area :message, :class => "span9", :rows => 10 %>
+        <%= f.text_area :message, :class => "span9", :rows => 10, :maxlength => 1220 %>
       </div>
       <br>
       <%= f.submit "Submit", :class => "btn btn-primary" %>
