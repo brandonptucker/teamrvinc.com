@@ -4,10 +4,9 @@
   </div>
 </div>
 
-<hr>
-
 <div class="row">
   <div class="span3">
+    <hr>
     <h3>Contact Details</h3>
     <hr>
     <address>
@@ -27,27 +26,30 @@
     Sun: Closed</p>
   </div>
   <div class="span9">
-    <h3>Send an Email</h3>
     <hr>
-    <form>
+    <h3>Send a Message</h3>
+    <hr>
+    <%= form_for @contact_message, :url => contact_path do |f| %>
       <div class="row">
-        <div class="span3">
-          <label>Name</label>
-          <input type="text" class="span3">
+        <div class="control-group span3 <%= @contact_message.errors.has_key?(:name) ? "error": "" %>">
+          <%= f.label :name %>
+          <%= f.text_field :name, :class => "span3" %>
         </div>
-        <div class="span3">
-          <label>Email</label>
-          <input type="email" class="span3">
+        <div class="control-group span3 <%= @contact_message.errors.has_key?(:email) ? "error": "" %>">
+          <%= f.label :email %>
+          <%= f.text_field :email, :class => "span3" %>
         </div>
-        <div class="span3">
-          <label>Phone</label>
-          <input type="tel" class="span3">
+        <div class="control-group span3 <%= @contact_message.errors.has_key?(:phone) ? "error": "" %>">
+          <%= f.label :phone %>
+          <%= f.text_field :phone, :class => "span3" %>
         </div>
       </div>
-      <label>Message</label>
-      <textarea class="span9" rows="10"></textarea>
+      <div class="control-group <%= @contact_message.errors.has_key?(:message) ? "error": "" %>">
+        <%= f.label :message %>
+        <%= f.text_area :message, :class => "span9", :rows => 10 %>
+      </div>
       <br>
-      <button class="btn btn-primary">Submit</button>
-    </form>
+      <%= f.submit "Submit", :class => "btn btn-primary" %>
+    <% end %>
   </div>
 </div>
