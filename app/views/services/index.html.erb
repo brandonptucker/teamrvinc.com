@@ -15,7 +15,7 @@
           <%= image_tag service.image.url(:medium) %>
           <div class="caption" style="text-align: center;">
             <h3><%= service.name %></h3>
-            <p>Starting at <strong>$<%= service.price %></strong></p>
+            <p>Starting at <strong><%= number_to_currency service.price %></strong></p>
             <% if logged_in? %>
               <p>
                 <%= link_to "Edit", edit_service_path(service), :class => "btn btn-mini" %>
