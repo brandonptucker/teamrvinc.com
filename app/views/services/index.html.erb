@@ -1,36 +1,39 @@
 <h2>Featured Services</h2>
 <hr>
-
-<div class="row">
-  <% @services.each do |service| %>
-    <div class="span3">
-      <% if logged_in? %>
-      <div class="thumbnail" style="margin-bottom: 18px; background-color: <%= service.active == true ? "#DFF0D8" : "#F2DEDE"%>; border-color: <%= service.active == true ? "#D6E9C6" : "#EED3D7"%>;">
-        <p>
-          <span class="label <%= service.active == true ? "label-success" : "label-important"%>"><%= service.active == true ? "Active" : "Inactive"%></span>
-        </p>
-      <% else %>
-      <div class="thumbnail" style="margin-bottom: 18px;">
-      <% end %>
-        <%= image_tag service.image.url(:medium) %>
-        <div class="caption" style="text-align: center;">
-          <h3><%= service.name %></h3>
-          <p>Starting at <strong>$<%= service.price %></strong></p>
-          <% if logged_in? %>
-            <p>
-              <%= link_to "Edit", edit_service_path(service), :class => "btn btn-mini" %>
-              <%= link_to "Destroy",
-                          service_path(service),
-                          :method => :delete,
-                          :confirm => "Are you sure?",
-                          :class => 'btn btn-mini btn-danger' %>
-            </p>
-          <% end %>
+<% if @services.length > 0  %>
+  <div class="row">
+    <% @services.each do |service| %>
+      <div class="span3">
+        <% if logged_in? %>
+        <div class="thumbnail" style="margin-bottom: 18px; background-color: <%= service.active == true ? "#DFF0D8" : "#F2DEDE"%>; border-color: <%= service.active == true ? "#D6E9C6" : "#EED3D7"%>;">
+          <p>
+            <span class="label <%= service.active == true ? "label-success" : "label-important"%>"><%= service.active == true ? "Active" : "Inactive"%></span>
+          </p>
+        <% else %>
+        <div class="thumbnail" style="margin-bottom: 18px;">
+        <% end %>
+          <%= image_tag service.image.url(:medium) %>
+          <div class="caption" style="text-align: center;">
+            <h3><%= service.name %></h3>
+            <p>Starting at <strong>$<%= service.price %></strong></p>
+            <% if logged_in? %>
+              <p>
+                <%= link_to "Edit", edit_service_path(service), :class => "btn btn-mini" %>
+                <%= link_to "Destroy",
+                            service_path(service),
+                            :method => :delete,
+                            :confirm => "Are you sure?",
+                            :class => 'btn btn-mini btn-danger' %>
+              </p>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
+<% else %>
+  <p>There are currently no featured services.</p>
+<% end %>
 
 <% if logged_in? %>
 <%= link_to "New Service", new_service_path, :class => 'btn btn-primary' %>
