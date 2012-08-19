@@ -1,14 +1,16 @@
-class ContactMessage
+class ServiceAppointment
   include ActiveModel::Validations
   include ActiveModel::Conversion
   extend ActiveModel::Naming
   
-  attr_accessor :name, :email, :phone, :message
+  attr_accessor :name, :email, :phone, :year, :make, :model, :additional_information
   
-  validates :name, :email, :phone, :message, :presence => true
+  validates :name, :email, :phone, :year, :make, :model, :additional_information, :presence => true
   validates :email, :format => { :with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i }
   validates :phone, :length => { :is => 10}
-  validates :message, :length => { :maximum => 1220 }
+  validates :year, :numericality => true
+  validates :year, :length => { :is => 4}
+  validates :additional_information, :length => { :maximum => 1220 }
 
   def initialize(attributes = {})
     attributes.each do |name, value|

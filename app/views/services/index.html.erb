@@ -1,0 +1,106 @@
+<h2>Featured Services</h2>
+<hr>
+
+<div class="row">
+  <% @services.each do |service| %>
+    <div class="span3">
+      <% if logged_in? %>
+      <div class="thumbnail" style="margin-bottom: 18px; background-color: <%= service.active == true ? "#DFF0D8" : "#F2DEDE"%>; border-color: <%= service.active == true ? "#D6E9C6" : "#EED3D7"%>;">
+        <p>
+          <span class="label <%= service.active == true ? "label-success" : "label-important"%>"><%= service.active == true ? "Active" : "Inactive"%></span>
+        </p>
+      <% else %>
+      <div class="thumbnail" style="margin-bottom: 18px;">
+      <% end %>
+        <%= image_tag service.image.url(:medium) %>
+        <div class="caption" style="text-align: center;">
+          <h3><%= service.name %></h3>
+          <p>Starting at <strong>$<%= service.price %></strong></p>
+          <% if logged_in? %>
+            <p>
+              <%= link_to "Edit", edit_service_path(service), :class => "btn btn-mini" %>
+              <%= link_to "Destroy",
+                          service_path(service),
+                          :method => :delete,
+                          :confirm => "Are you sure?",
+                          :class => 'btn btn-mini btn-danger' %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<% if logged_in? %>
+<%= link_to "New Service", new_service_path, :class => 'btn btn-primary' %>
+<% end %>
+
+<div class="row">
+  <div class="span3">
+    <hr>
+    <h2>Services</h2>
+    <hr>
+    <p><strong>We offer installation, repair, and maintenance of the following:</strong></p>
+    <ul>
+      <li>Appliances</li>
+      <li>Accessories</li>
+      <li>Awnings and Covers</li>
+      <li>Electrical</li>
+      <li>Electronics</li>
+      <li>Plumbing</li>
+      <li>Towing and Safety</li>
+      <li>Roofs</li>
+    </ul>
+    <p><strong>Other Services:</strong></p>
+    <ul>
+      <li>Collision and Body</li>
+      <li>Maintenance</li>
+      <li>Insurance Estimates</li>
+      <li>Warranty Claims</li>
+      <li>Winterization</li>
+      <li>Detailing</li>
+    </ul>
+    <br>
+  </div>
+  <div class="span9">
+    <hr>
+    <h2>Request an Appointment</h2>
+    <hr>
+    <%= form_for @service_appointment, :url => send_service_appointment_path do |f| %>
+      <div class="row">
+        <div class="control-group span3 <%= @service_appointment.errors.has_key?(:name) ? "error": "" %>">
+          <%= f.label :name %>
+          <%= f.text_field :name, :class => "span3" %>
+        </div>
+        <div class="control-group span3 <%= @service_appointment.errors.has_key?(:email) ? "error": "" %>">
+          <%= f.label :email %>
+          <%= f.text_field :email, :class => "span3" %>
+        </div>
+        <div class="control-group span3 <%= @service_appointment.errors.has_key?(:phone) ? "error": "" %>">
+          <%= f.label :phone %>
+          <%= f.text_field :phone, :class => "span3" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="control-group span3 <%= @service_appointment.errors.has_key?(:year) ? "error": "" %>">
+          <%= f.label :year %>
+          <%= f.text_field :year, :class => "span3" %>
+        </div>
+        <div class="control-group span3 <%= @service_appointment.errors.has_key?(:make) ? "error": "" %>">
+          <%= f.label :make %>
+          <%= f.text_field :make, :class => "span3" %>
+        </div>
+        <div class="control-group span3 <%= @service_appointment.errors.has_key?(:model) ? "error": "" %>">
+          <%= f.label :model %>
+          <%= f.text_field :model, :class => "span3" %>
+        </div>
+      </div>
+      <div class="control-group <%= @service_appointment.errors.has_key?(:additional_information) ? "error": "" %>">
+        <%= f.label :additional_information, "Additional Information" %>
+        <%= f.text_area :additional_information, :class => "span9", :rows => 10, :maxlength => 1220 %>
+      </div>
+      <%= f.submit "Submit", :class => "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

@@ -7,7 +7,7 @@
 <div class="row">
   <div class="span3">
     <hr>
-    <h3>Contact Details</h3>
+    <h2>Contact Details</h2>
     <hr>
     <address>
       <strong>Team RV, Inc.</strong><br>
@@ -27,9 +27,9 @@
   </div>
   <div class="span9">
     <hr>
-    <h3>Send a Message</h3>
+    <h2>Send a Message</h2>
     <hr>
-    <%= form_for @contact_message, :url => contact_path do |f| %>
+    <%= form_for @contact_message, :url => send_contact_message_path do |f| %>
       <div class="row">
         <div class="control-group span3 <%= @contact_message.errors.has_key?(:name) ? "error": "" %>">
           <%= f.label :name %>
@@ -48,7 +48,6 @@
         <%= f.label :message %>
         <%= f.text_area :message, :class => "span9", :rows => 10, :maxlength => 1220 %>
       </div>
-      <br>
       <%= f.submit "Submit", :class => "btn btn-primary" %>
     <% end %>
   </div>

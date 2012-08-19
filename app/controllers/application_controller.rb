@@ -2,8 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   def authorize
-    unless signed_in?
-      redirect_to signin_path
+    unless logged_in?
+      redirect_to login_path
     end
   end
 
