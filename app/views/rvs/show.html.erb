@@ -1,0 +1,70 @@
+<!--
+<%- model_class = RV -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:condition) %>:</strong></dt>
+  <dd><%= @rv.condition %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:category) %>:</strong></dt>
+  <dd><%= @rv.category %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:year) %>:</strong></dt>
+  <dd><%= @rv.year %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:make) %>:</strong></dt>
+  <dd><%= @rv.make %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:model) %>:</strong></dt>
+  <dd><%= @rv.model %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:length) %>:</strong></dt>
+  <dd><%= @rv.length %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:list_price) %>:</strong></dt>
+  <dd><%= @rv.list_price %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
+  <dd><%= @rv.price %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:stock_number) %>:</strong></dt>
+  <dd><%= @rv.stock_number %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @rv.description %></dd>
+</dl>
+-->
+
+<div class="row">
+  <div class="span6" style="padding-bottom: 18px;">
+    <img src="http://placehold.it/600x450">
+  </div>
+  <div class="span6">
+    <h2><%= get_title @rv %></h2>
+    <hr>
+    <dl class="dl-horizontal">
+      <dt style="text-align: left; margin-bottom: 9px;"><strong>Price</strong></dt>
+      <dd style="margin-bottom: 9px;"><strong><%= number_to_currency @rv.price %></strong></dd>
+      <dt style="text-align: left; margin-bottom: 9px;"><strong>List Price</strong></dt>
+      <dd style="margin-bottom: 9px; text-decoration: line-through;"><%= number_to_currency @rv.list_price %></dd>
+      <dt style="text-align: left; margin-bottom: 9px;"><strong>Stock Number</strong></dt>
+      <dd style="margin-bottom: 9px;"><%= @rv.stock_number %></dd>
+      <dt style="text-align: left; margin-bottom: 9px;"><strong>Length</strong></dt>
+      <dd style="margin-bottom: 9px;"><%= @rv.length %></dd>
+      <dt style="text-align: left; margin-bottom: 9px;"><strong>Category</strong></dt>
+      <dd style="margin-bottom: 9px;"><%= @rv.category %></dd>
+      <dt style="text-align: left; margin-bottom: 9px;"><strong>Condition</strong></dt>
+      <dd style="margin-bottom: 9px;"><%= @rv.condition %></dd>
+    </dl>
+    <hr>
+    <p><strong>Description</strong></p>
+    <p><%= @rv.description %></p>
+  </div>
+</div>
+
+<div class="form-actions">
+  <%= link_to "Back",
+              rvs_path, :class => 'btn'  %>
+  <% if logged_in? %>
+    <%= link_to "Edit",
+                edit_rv_path(@rv), :class => 'btn' %>
+    <%= link_to "Destroy",
+                rv_path(@rv),
+                :method => 'delete',
+                :confirm => "Are you sure?",
+                :class => 'btn btn-danger' %>
+  <% end %>
+</div>

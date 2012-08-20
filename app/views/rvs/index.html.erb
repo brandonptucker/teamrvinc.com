@@ -1,0 +1,34 @@
+<h2>RVs</h2>
+<hr>
+
+<% if @rvs.length > 0  %>
+  <div class="row">
+    <% @rvs.each do |rv| %>
+      <div class="span3">
+        <div style="margin-bottom: 18px; text-align: center;">
+          <a href="<%= rv_path(rv)%>"><img src="http://placehold.it/300x225"></a>
+          <div style="padding: 9px;">
+            <a href="<%= rv_path(rv) %>" style="color: #333"><h3><%= get_title rv %></h3></a>
+            <p><strong><%= number_to_currency rv.price %></strong></p>
+            <% if logged_in? %>
+              <p>
+              <%= link_to "Edit", edit_rv_path(rv), :class => "btn btn-mini" %>
+              <%= link_to "Destroy",
+                          rv_path(rv),
+                          :method => :delete,
+                          :confirm => "Are you sure?",
+                          :class => 'btn btn-mini btn-danger' %>
+              </p>
+            <% end %>  
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>There are currently no rvs.</p>
+<% end %>
+
+<% if logged_in? %>
+  <%= link_to "New RV", new_rv_path, :class => 'btn btn-primary' %>
+<% end %>
