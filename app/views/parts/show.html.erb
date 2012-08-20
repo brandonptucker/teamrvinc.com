@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="span6" style="padding-bottom: 18px;">
+    <%= image_tag @part.image.url(:large) %>
+  </div>
+  <div class="span6">
+    <h2><%= @part.name %></h2>
+    <hr>
+    <dl class="dl-horizontal">
+      <dt style="text-align: left; margin-bottom: 9px;"><strong>Price</strong></dt>
+      <dd style="margin-bottom: 9px;"><strong><%= number_to_currency @part.price %></strong></dd>
+      <dt style="text-align: left; margin-bottom: 9px;"><strong>List Price</strong></dt>
+      <dd style="margin-bottom: 9px; text-decoration: line-through;"><%= number_to_currency @part.list_price %></dd>
+      <dt style="text-align: left; margin-bottom: 9px;"><strong>Part Number</strong></dt>
+      <dd style="margin-bottom: 9px;"><%= @part.part_number %></dd>
+    </dl>
+    <hr>
+    <p><strong>Description</strong></p>
+    <p><%= @part.description %></p>
+  </div>
+</div>
+
+<div class="form-actions">
+  <%= link_to "Back",
+              parts_path, :class => 'btn'  %>
+  <% if logged_in? %>
+  <%= link_to "Edit",
+              edit_part_path(@part), :class => 'btn' %>
+  <%= link_to "Destroy",
+              part_path(@part),
+              :method => 'delete',
+              :confirm => "Are you sure?",
+              :class => 'btn btn-danger' %>
+  <% end %>
+</div>

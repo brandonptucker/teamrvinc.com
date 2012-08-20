@@ -11,4 +11,5 @@ TeamRV::Application.routes.draw do
 
   resources :sessions, only: [:new, :create, :destroy]
   resources :services, except: [:show]
+  resources :parts
 end

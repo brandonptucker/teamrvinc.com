@@ -1,0 +1,86 @@
+<h2>Featured Parts</h2>
+<hr>
+<% if @parts.length > 0  %>
+  <div class="row">
+    <% @parts.each do |part| %>
+      <div class="span3">
+        <div style="margin-bottom: 18px; text-align: center;">
+          <a href="<%= part_path(part) %>"><%= image_tag part.image.url(:medium) %></a>
+          <div style="padding: 9px;">
+            <a href="<%= part_path(part) %>" style="color: #333"><h3><%= part.name %></h3></a>
+            <p><strong><%= number_to_currency part.price %></strong></p>
+            <% if logged_in? %>
+              <p>
+              <%= link_to "Edit", edit_part_path(part), :class => "btn btn-mini" %>
+              <%= link_to "Destroy",
+                          part_path(part),
+                          :method => :delete,
+                          :confirm => "Are you sure?",
+                          :class => 'btn btn-mini btn-danger' %>
+              </p>
+            <% end %>  
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>There are currently no featured parts.</p>
+<% end %>
+
+<% if logged_in? %>
+  <%= link_to "New Part", new_part_path, :class => 'btn btn-primary' %>
+<% end %>
+
+<hr>
+<div class="row">
+  <div class="span12">
+    <h2>Parts</h2>
+    <hr>
+    <p><strong>We offer a full line of parts and accessories:</strong></p>
+    <div class="row" style="margin-bottom: 18px;">
+      <div class="span3">
+        <ul style="margin-bottom: 0px;">
+         <li>Refridgerators</li>
+         <li>Air Conditioners</li>
+         <li>Furnaces</li>
+         <li>Water Heaters</li>
+         <li>Generators</li>
+        </ul>
+      </div>
+      <div class="span3">
+        <ul style="margin-bottom: 0px;">
+         <li>Furniture</li>
+         <li>Electronics</li>
+         <li>Electrical</li>
+         <li>Lights</li>
+         <li>Maintenance</li>
+        </ul>
+      </div>
+      <div class="span3">
+        <ul style="margin-bottom: 0px;">
+         <li>Hardware</li>
+         <li>Vents and Trim</li>
+         <li>Awnings and Fabrics</li>
+         <li>LP Gas</li>
+         <li>Plumbing</li>
+        </ul>
+      </div>
+      <div class="span3">
+        <ul style="margin-bottom: 0px;">
+         <li>Accessories</li>
+         <li>Towing and Safety</li>
+         <li>Brakes and Axle</li>
+         <li>Interior</li>
+         <li>Exterior</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <a href="http://www.go-rv.com/coast/do/catalog/main?dealerId=2760" class="btn btn-primary">Visit our online store</a>
+  </div>
+</div>
