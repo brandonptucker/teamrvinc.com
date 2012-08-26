@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   def home
+    @rvs = RV.all.sort_by{ rand }.slice(0, 4)
   end
 
   def contact

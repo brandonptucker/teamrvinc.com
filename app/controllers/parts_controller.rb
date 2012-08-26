@@ -49,7 +49,7 @@ class PartsController < ApplicationController
         format.json { render json: @part, status: :created, location: @part }
       else
         if @part.errors.any?
-          flash.now[:error] = "Sorry, the part could not be created! Please correct the errors below and create the part again."
+          flash.now[:error] = "Sorry, the Part could not be created! Please correct the errors below and create the part again."
         end
         format.html { render action: "new" }
         format.json { render json: @part.errors, status: :unprocessable_entity }
@@ -68,7 +68,7 @@ class PartsController < ApplicationController
         format.json { head :no_content }
       else
         if @part.errors.any?
-          flash.now[:error] = "Sorry, the part could not be created! Please correct the errors below and update the part again."
+          flash.now[:error] = "Sorry, the part could not be updated! Please correct the errors below and update the part again."
         end
         format.html { render action: "edit" }
         format.json { render json: @part.errors, status: :unprocessable_entity }

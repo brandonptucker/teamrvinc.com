@@ -1,12 +1,13 @@
-<h2>RVs</h2>
-<hr>
-
-<% if @rvs.length > 0  %>
+<% @categories.each_with_index do |(category, rvs), index| %>
+  <h2 style="<%= index > 0 ? "padding-top: 30px;" : "" %>"><%= category.pluralize %></h2>
+  <hr>
   <div class="row">
-    <% @rvs.each do |rv| %>
-      <div class="span3">
-        <div style="margin-bottom: 18px; text-align: center;">
-          <a href="<%= rv_path(rv)%>"><img src="http://placehold.it/300x225"></a>
+    <% rvs.each do |rv| %>
+     <div class="span3">
+        <div style="text-align: center;">
+          <% if rv.assets.length > 0 %>
+          <a href="<%= rv_path(rv)%>"><%= image_tag rv.assets.first.asset.url(:medium) %></a>
+          <% end %>
           <div style="padding: 9px;">
             <a href="<%= rv_path(rv) %>" style="color: #333"><h3><%= get_title rv %></h3></a>
             <p><strong><%= number_to_currency rv.price %></strong></p>
@@ -25,8 +26,6 @@
       </div>
     <% end %>
   </div>
-<% else %>
-  <p>There are currently no rvs.</p>
 <% end %>
 
 <% if logged_in? %>

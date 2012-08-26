@@ -6,16 +6,15 @@
     <h2><%= @part.name %></h2>
     <hr>
     <dl class="dl-horizontal">
-      <dt style="text-align: left; margin-bottom: 9px;"><strong>Price</strong></dt>
-      <dd style="margin-bottom: 9px;"><strong><%= number_to_currency @part.price %></strong></dd>
       <dt style="text-align: left; margin-bottom: 9px;"><strong>List Price</strong></dt>
       <dd style="margin-bottom: 9px; text-decoration: line-through;"><%= number_to_currency @part.list_price %></dd>
+      <dt style="text-align: left; margin-bottom: 9px;"><strong>Price</strong></dt>
+      <dd style="margin-bottom: 9px;"><strong><%= number_to_currency @part.price %></strong></dd>
       <dt style="text-align: left; margin-bottom: 9px;"><strong>Part Number</strong></dt>
       <dd style="margin-bottom: 9px;"><%= @part.part_number %></dd>
+      <dt style="text-align: left; margin-bottom: 9px;"><strong>Description</strong></dt>
+      <dd style="margin-bottom: 9px;"><%= @part.description %></dd>
     </dl>
-    <hr>
-    <p><strong>Description</strong></p>
-    <p><%= @part.description %></p>
   </div>
 </div>
 

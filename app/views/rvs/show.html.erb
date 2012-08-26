@@ -1,45 +1,31 @@
-<!--
-<%- model_class = RV -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
-</div>
-
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:condition) %>:</strong></dt>
-  <dd><%= @rv.condition %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:category) %>:</strong></dt>
-  <dd><%= @rv.category %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:year) %>:</strong></dt>
-  <dd><%= @rv.year %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:make) %>:</strong></dt>
-  <dd><%= @rv.make %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:model) %>:</strong></dt>
-  <dd><%= @rv.model %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:length) %>:</strong></dt>
-  <dd><%= @rv.length %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:list_price) %>:</strong></dt>
-  <dd><%= @rv.list_price %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
-  <dd><%= @rv.price %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:stock_number) %>:</strong></dt>
-  <dd><%= @rv.stock_number %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-  <dd><%= @rv.description %></dd>
-</dl>
--->
-
 <div class="row">
-  <div class="span6" style="padding-bottom: 18px;">
-    <img src="http://placehold.it/600x450">
+  <div class="span6">
+    <% if @rv.assets.length > 0 %>
+      <div id="carousel" class="carousel slide">
+        <div class="carousel-inner">
+          <% @rv.assets.each_with_index do |asset, index| %>
+            <div class="item <%= index == 0 ? "active" : "" %>">
+              <%= image_tag asset.asset.url(:large) %>
+            </div>
+          <% end %>
+        </div>
+        <a class="left carousel-control" href="#carousel" data-slide="prev">‹</a>
+        <a class="right carousel-control" href="#carousel" data-slide="next">›</a>
+      </div>
+    <% end %>
   </div>
   <div class="span6">
     <h2><%= get_title @rv %></h2>
     <hr>
     <dl class="dl-horizontal">
-      <dt style="text-align: left; margin-bottom: 9px;"><strong>Price</strong></dt>
-      <dd style="margin-bottom: 9px;"><strong><%= number_to_currency @rv.price %></strong></dd>
       <dt style="text-align: left; margin-bottom: 9px;"><strong>List Price</strong></dt>
       <dd style="margin-bottom: 9px; text-decoration: line-through;"><%= number_to_currency @rv.list_price %></dd>
+      <dt style="text-align: left; margin-bottom: 9px;"><strong>Price</strong></dt>
+      <dd style="margin-bottom: 9px;"><strong><%= number_to_currency @rv.price %></strong></dd>
+      <% if logged_in? %>
+        <dt style="text-align: left; margin-bottom: 9px;"><strong>Cost</strong></dt>
+        <dd style="margin-bottom: 9px;"><%= number_to_currency @rv.cost %></dd>
+      <% end %>
       <dt style="text-align: left; margin-bottom: 9px;"><strong>Stock Number</strong></dt>
       <dd style="margin-bottom: 9px;"><%= @rv.stock_number %></dd>
       <dt style="text-align: left; margin-bottom: 9px;"><strong>Length</strong></dt>
@@ -48,10 +34,9 @@
       <dd style="margin-bottom: 9px;"><%= @rv.category %></dd>
       <dt style="text-align: left; margin-bottom: 9px;"><strong>Condition</strong></dt>
       <dd style="margin-bottom: 9px;"><%= @rv.condition %></dd>
+      <dt style="text-align: left; margin-bottom: 9px;"><strong>Description</strong></dt>
+      <dd style="margin-bottom: 9px;"><%= @rv.description %></dd>
     </dl>
-    <hr>
-    <p><strong>Description</strong></p>
-    <p><%= @rv.description %></p>
   </div>
 </div>
 
@@ -67,4 +52,33 @@
                 :confirm => "Are you sure?",
                 :class => 'btn btn-danger' %>
   <% end %>
+</div>
+
+<div class="row">
+  <div class="span12">
+  <h2>Request More Information</h2>
+  <hr>
+  <%= form_for @rv_request, :url => send_rv_request_path do |f| %>
+      <%= f.hidden_field :id, :value => @rv.id %>
+      <div class="row">
+        <div class="control-group span4 <%= @rv_request.errors.has_key?(:name) ? "error": "" %>">
+          <%= f.label :name %>
+          <%= f.text_field :name, :class => "span4" %>
+        </div>
+        <div class="control-group span4 <%= @rv_request.errors.has_key?(:email) ? "error": "" %>">
+          <%= f.label :email %>
+          <%= f.text_field :email, :class => "span4" %>
+        </div>
+        <div class="control-group span4 <%= @rv_request.errors.has_key?(:phone) ? "error": "" %>">
+          <%= f.label :phone %>
+          <%= f.text_field :phone, :class => "span4" %>
+        </div>
+        <div class="control-group span12 <%= @rv_request.errors.has_key?(:questions_or_comments) ? "error": "" %>">
+          <%= f.label :questions_or_comments %>
+        <%= f.text_area :questions_or_comments, :class => "span12", :rows => 10, :maxlength => 1220 %>
+        </div>
+      </div>
+    <button class="btn btn-primary">Submit</button>
+  <% end %>
+  </div>
 </div>

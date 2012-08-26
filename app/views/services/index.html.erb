@@ -1,37 +1,33 @@
 <h2>Featured Services</h2>
 <hr>
-<% if @services.length > 0  %>
-  <div class="row">
-    <% @services.each do |service| %>
-      <div class="span3">
-        <div style="margin-bottom: 18px; text-align: center;">
-        <% if logged_in? %>
-          <p>
-            <span class="label <%= service.active == true ? "label-success" : "label-important"%>"><%= service.active == true ? "Active" : "Inactive"%></span>
-          </p>
-        <% end %>
-          <%= image_tag service.image.url(:medium) %>
-          <div style="padding: 9px;">
-            <h3><%= service.name %></h3>
-            <p>Starting at <strong><%= number_to_currency service.price %></strong></p>
-            <% if logged_in? %>
-              <p>
-                <%= link_to "Edit", edit_service_path(service), :class => "btn btn-mini" %>
-                <%= link_to "Destroy",
-                            service_path(service),
-                            :method => :delete,
-                            :confirm => "Are you sure?",
-                            :class => 'btn btn-mini btn-danger' %>
-              </p>
-            <% end %>
-          </div>
+<div class="row">
+  <% @services.each do |service| %>
+    <div class="span3">
+      <div style="text-align: center;">
+      <% if logged_in? %>
+        <p>
+          <span class="label <%= service.active == true ? "label-success" : "label-important"%>"><%= service.active == true ? "Active" : "Inactive"%></span>
+        </p>
+      <% end %>
+        <%= image_tag service.image.url(:medium) %>
+        <div style="padding: 9px;">
+          <h3><%= service.name %></h3>
+          <p>Starting at <strong><%= number_to_currency service.price %></strong></p>
+          <% if logged_in? %>
+            <p>
+              <%= link_to "Edit", edit_service_path(service), :class => "btn btn-mini" %>
+              <%= link_to "Destroy",
+                          service_path(service),
+                          :method => :delete,
+                          :confirm => "Are you sure?",
+                          :class => 'btn btn-mini btn-danger' %>
+            </p>
+          <% end %>
         </div>
       </div>
-    <% end %>
-  </div>
-<% else %>
-  <p>There are currently no featured services.</p>
-<% end %>
+    </div>
+  <% end %>
+</div>
 
 <% if logged_in? %>
 <%= link_to "New Service", new_service_path, :class => 'btn btn-primary' %>
@@ -39,8 +35,7 @@
 
 <div class="row">
   <div class="span3">
-    <hr>
-    <h2>Services</h2>
+    <h2 style="margin-top: 30px;">Services</h2>
     <hr>
     <p><strong>We offer installation, repair, and maintenance of the following:</strong></p>
     <ul>
@@ -65,8 +60,7 @@
     <br>
   </div>
   <div class="span9">
-    <hr>
-    <h2>Request an Appointment</h2>
+    <h2 style="margin-top: 30px;">Request an Appointment</h2>
     <hr>
     <%= form_for @service_appointment, :url => send_service_appointment_path do |f| %>
       <div class="row">

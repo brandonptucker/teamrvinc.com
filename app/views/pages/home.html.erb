@@ -1,2 +1,17 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<h2>Featured RVs</h2>
+<hr>
+<div class="row">
+  <% @rvs.each do |rv| %>
+   <div class="span3">
+      <div style="text-align: center;">
+        <% if rv.assets.length > 0 %>
+        <a href="<%= rv_path(rv)%>"><%= image_tag rv.assets.first.asset.url(:medium) %></a>
+        <% end %>
+        <div style="padding: 9px;">
+          <a href="<%= rv_path(rv) %>" style="color: #333"><h3><%= get_title rv %></h3></a>
+          <p><strong><%= number_to_currency rv.price %></strong></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

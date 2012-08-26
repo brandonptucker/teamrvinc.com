@@ -1,64 +1,109 @@
-<%= form_for @rv, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :condition, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :condition, :class => 'text_field' %>
+<%= form_for @rv, :html => { :class => 'form-horizontal', :multipart => "true" } do |f| %>
+  <div class="row">
+    <div class="span6">
+      <div class="control-group  <%= @rv.errors.has_key?(:condition) ? "error": "" %>">
+        <%= f.label :condition, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.select :condition, options_for_select(["New", "Used"])%>
+        </div>
+      </div>
+      <div class="control-group <%= @rv.errors.has_key?(:category) ? "error": "" %>">
+        <%= f.label :category, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :category, :class => 'text_field', :data => { :provide => "typeahead", :source => @categories }, :autocomplete => "off" %>
+        </div>
+      </div>
+      <div class="control-group <%= @rv.errors.has_key?(:year) ? "error": "" %>">
+        <%= f.label :year, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.number_field :year, :class => 'number_field' %>
+        </div>
+      </div>
+      <div class="control-group <%= @rv.errors.has_key?(:make) ? "error": "" %>">
+        <%= f.label :make, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :make, :class => 'text_field', :data => { :provide => "typeahead", :source => @makes }, :autocomplete => "off" %>
+        </div>
+      </div>
+      <div class="control-group <%= @rv.errors.has_key?(:model) ? "error": "" %>">
+        <%= f.label :model, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :model, :class => 'text_field' %>
+        </div>
+      </div>
+      <div class="control-group <%= @rv.errors.has_key?(:length) ? "error": "" %>">
+        <%= f.label :length, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.number_field :length, :class => 'number_field' %>
+        </div>
+      </div>
+      <div class="control-group <%= @rv.errors.has_key?(:list_price) ? "error": "" %>">
+        <%= f.label :list_price, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :list_price, :class => 'text_field' %>
+        </div>
+      </div>
+      <div class="control-group <%= @rv.errors.has_key?(:price) ? "error": "" %>">
+        <%= f.label :price, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :price, :class => 'text_field' %>
+        </div>
+      </div>
+      <div class="control-group <%= @rv.errors.has_key?(:cost) ? "error": "" %>">
+        <%= f.label :cost, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :cost, :class => 'text_field' %>
+        </div>
+      </div>
+      <div class="control-group <%= @rv.errors.has_key?(:stock_number) ? "error": "" %>">
+        <%= f.label :stock_number, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :stock_number, :class => 'text_field' %>
+        </div>
+      </div>
+      <div class="control-group <%= @rv.errors.has_key?(:description) ? "error": "" %>">
+        <%= f.label :description, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_area :description, :class => 'text_area' %>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :category, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :category, :class => 'text_field' %>
+
+    <% if @rv.assets.count > 0 %>
+      <div class="span6">
+        <div class="control-group">
+          <label class="control-label">Current Images</label>
+          <%= f.fields_for :assets do |asset| %>
+            <% unless asset.object.new_record? %>
+              <div class="controls">
+                <%= image_tag(asset.object.asset.url(:small)) %>
+                <label class="checkbox">
+                  <%= asset.check_box :_destroy %> Destroy
+                </label>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @rv.assets.count < 8 %>
+    <div class="span6">
+      <div class="control-group">
+        <label for="rv_assets" class="control-label">New Images</label>
+        <%= f.fields_for :assets do |asset| %>
+          <% if asset.object.new_record? %>
+            <div class="controls">
+              <%= asset.file_field :asset %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
     </div>
+    <% end %>
+
   </div>
-  <div class="control-group">
-    <%= f.label :year, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.number_field :year, :class => 'number_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :make, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :make, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :model, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :model, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :length, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.number_field :length, :class => 'number_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :list_price, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :list_price, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :price, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :price, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :stock_number, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :stock_number, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :description, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :description, :class => 'text_area' %>
-    </div>
-  </div>
+
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
