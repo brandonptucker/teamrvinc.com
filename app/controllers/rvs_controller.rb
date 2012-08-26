@@ -3,8 +3,7 @@ class RVsController < ApplicationController
   # GET /rvs
   # GET /rvs.json
   def index
-    @rvs = RV.all
-    @categories = @rvs.group_by(&:category).sort
+    @categories = RV.all.group_by(&:category).sort
 
     respond_to do |format|
       format.html # index.html.erb
@@ -121,5 +120,9 @@ class RVsController < ApplicationController
       end
       render :action => :show
     end
+  end
+
+  def rv_report
+    @categories = RV.all.group_by(&:category).sort
   end
 end
