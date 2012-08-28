@@ -4,7 +4,7 @@
       <div class="control-group  <%= @rv.errors.has_key?(:condition) ? "error": "" %>">
         <%= f.label :condition, :class => 'control-label' %>
         <div class="controls">
-          <%= f.select :condition, options_for_select(["New", "Used"])%>
+          <%= f.select :condition, options_for_select(["New", "Used"], :selected => @rv.condition) %>
         </div>
       </div>
       <div class="control-group <%= @rv.errors.has_key?(:category) ? "error": "" %>">
