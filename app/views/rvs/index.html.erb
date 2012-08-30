@@ -1,31 +1,35 @@
 <% @categories.each_with_index do |(category, rvs), index| %>
   <h2 style="<%= index > 0 ? "padding-top: 30px;" : "" %>"><%= category.pluralize %></h2>
   <hr>
-  <div class="row">
-    <% rvs.each do |rv| %>
-     <div class="span3">
-        <div style="text-align: center;">
-          <% if rv.assets.length > 0 %>
-          <a href="<%= rv_path(rv)%>"><%= image_tag rv.assets.first.asset.url(:medium) %></a>
-          <% end %>
-          <div style="padding: 9px;">
-            <a href="<%= rv_path(rv) %>" style="color: #333"><h3><%= get_title rv %></h3></a>
-            <p><strong><%= number_to_currency rv.price %></strong></p>
-            <% if logged_in? %>
-              <p>
-              <%= link_to "Edit", edit_rv_path(rv), :class => "btn btn-mini" %>
-              <%= link_to "Destroy",
-                          rv_path(rv),
-                          :method => :delete,
-                          :confirm => "Are you sure?",
-                          :class => 'btn btn-mini btn-danger' %>
-              </p>
-            <% end %>  
+  <% rvs.each_slice(4) do |slice| %>
+    <div class="row">
+      <% slice.each do |rv| %>
+       <div class="span3">
+          <div style="text-align: center;">
+            <% if rv.assets.length > 0 %>
+              <a href="<%= rv_path(rv)%>"><%= image_tag rv.assets.first.asset.url(:medium) %></a>
+            <% else %>
+              <a href="<%= rv_path(rv)%>"><img src="/assets/images_coming_soon_medium.gif"></a>
+            <% end %>
+            <div style="padding: 9px;">
+              <a href="<%= rv_path(rv) %>" style="color: #333"><h3><%= get_title rv %></h3></a>
+              <p><strong><%= number_to_currency rv.price %></strong></p>
+              <% if logged_in? %>
+                <p>
+                <%= link_to "Edit", edit_rv_path(rv), :class => "btn btn-mini" %>
+                <%= link_to "Destroy",
+                            rv_path(rv),
+                            :method => :delete,
+                            :confirm => "Are you sure?",
+                            :class => 'btn btn-mini btn-danger' %>
+                </p>
+              <% end %>  
+            </div>
           </div>
         </div>
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>
 
 <% if logged_in? %>

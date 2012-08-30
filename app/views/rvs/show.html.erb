@@ -1,18 +1,22 @@
 <div class="row">
   <div class="span6">
-    <% if @rv.assets.length > 0 %>
       <div id="carousel" class="carousel slide">
         <div class="carousel-inner">
-          <% @rv.assets.each_with_index do |asset, index| %>
-            <div class="item <%= index == 0 ? "active" : "" %>">
-              <%= image_tag asset.asset.url(:large) %>
+          <% if @rv.assets.length > 0 %>
+            <% @rv.assets.each_with_index do |asset, index| %>
+              <div class="item <%= index == 0 ? "active" : "" %>">
+                <%= image_tag asset.asset.url(:large) %>
+              </div>
+            <% end %>
+          <% else %>
+            <div class="item active">
+              <img src="/assets/images_coming_soon_large.gif">
             </div>
           <% end %>
         </div>
         <a class="left carousel-control" href="#carousel" data-slide="prev">‹</a>
         <a class="right carousel-control" href="#carousel" data-slide="next">›</a>
       </div>
-    <% end %>
   </div>
   <div class="span6">
     <h2><%= get_title @rv %></h2>

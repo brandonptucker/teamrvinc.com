@@ -3,7 +3,7 @@ class RVsController < ApplicationController
   # GET /rvs
   # GET /rvs.json
   def index
-    @categories = RV.all.group_by(&:category).sort
+    @categories = RV.all.sort_by(&:year).reverse.group_by(&:category).sort
 
     respond_to do |format|
       format.html # index.html.erb
@@ -58,7 +58,7 @@ class RVsController < ApplicationController
         if @rv.errors.any?
           flash.now[:error] = "Sorry, the RV could not be created! Please correct the errors below and create the RV again."
         end
-        8.times { @rv.assets.build }
+        (8 - @rv.assets.length).times { @rv.assets.build }
         format.html { render action: "new" }
         format.json { render json: @rv.errors, status: :unprocessable_entity }
       end
