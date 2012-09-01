@@ -1,4 +1,45 @@
-<h2>Featured RVs</h2>
+<div class="row">
+  <div class="span12">
+    <div id="carousel" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="assets/travel_trailer.jpg" alt="">
+        </div>
+        <div class="item">
+          <img src="assets/fifth_wheel.jpg" alt="">
+        </div>
+        <div class="item">
+          <img src="assets/motorhome.jpg" alt="">
+        </div>
+        <div class="item">
+          <img src="assets/camping_trailer.jpg" alt="">
+        </div>
+      </div>
+      <a class="left carousel-control" href="#carousel" data-slide="prev">‹</a>
+      <a class="right carousel-control" href="#carousel" data-slide="next">›</a>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span4">
+    <h2>RVs</h2>
+    <p>We offer new and used camping trailers, travel trailers, fifth wheels, toy haulers, motorhomes, and cargo trailers.</p>
+    <p><%= link_to "View RVs", rvs_path, :class => "btn btn-primary" %></p>
+  </div>
+  <div class="span4">
+    <h2>Parts</h2>
+    <p>Our parts showroom contains over 12,000 RV parts, accessories, and supplies.</p>
+    <p><%= link_to "View parts", parts_path, :class => "btn btn-primary" %></p>
+ </div>
+  <div class="span4">
+    <h2>Services</h2>
+    <p>Our certified RV technicians provide superior service, repair, and maintenance for your RV.</p>
+    <p><%= link_to "View services", services_path, :class => "btn btn-primary" %></p>
+  </div>
+</div>
+
+<h2 style="margin-top: 30px;">Featured RVs</h2>
 <hr>
 <div class="row">
   <% @rvs.each do |rv| %>
