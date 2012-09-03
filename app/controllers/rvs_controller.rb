@@ -3,7 +3,9 @@ class RVsController < ApplicationController
   # GET /rvs
   # GET /rvs.json
   def index
-    @categories = RV.all.sort_by(&:year).reverse.group_by(&:category).sort
+    @categories = RV.all.sort { |a, b| b.year <=> a.year }
+                        .group_by(&:category)
+                        .sort { |a,b| b[1].length <=> a[1].length }
 
     respond_to do |format|
       format.html # index.html.erb
