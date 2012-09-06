@@ -1,26 +1,42 @@
 <%= form_for @service, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group <%= @service.errors.has_key?(:name) ? "error": "" %>">
-    <%= f.label :name, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :name %>
+  <div class="row">
+    <div class="span6">
+      <div class="control-group <%= @service.errors.has_key?(:name) ? "error": "" %>">
+        <%= f.label :name, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :name %>
+        </div>
+      </div>
+      <div class="control-group <%= @service.errors.has_key?(:price) ? "error": "" %>">
+        <%= f.label :price, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :price %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :active, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.check_box :active %>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="control-group <%= @service.errors.has_key?(:price) ? "error": "" %>">
-    <%= f.label :price, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :price %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :active, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.check_box :active %>
-    </div>
-  </div>
-  <div class="control-group <%= @service.errors.has_key?(:image) ? "error": "" %>">
-    <%= f.label :image, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.file_field :image %>
+    <% if @service.image? %>
+      <div class="span6">
+        <div class="control-group">
+          <label class="control-label">Current Image</label>
+          <div class="controls">
+            <%= image_tag @service.image.url(:small)%>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="span6">
+      <div class="control-group <%= @service.errors.has_key?(:image) ? "error": "" %>">
+        <label class="control-label">New Image</label>
+        <div class="controls">
+          <%= f.file_field :image %>
+        </div>
+      </div>
     </div>
   </div>
 
