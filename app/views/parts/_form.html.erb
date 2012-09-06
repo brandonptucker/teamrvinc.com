@@ -43,7 +43,7 @@
         <div class="control-group">
           <label class="control-label">Current Image</label>
           <div class="controls">
-            <%= image_tag @part.image.url(:small)%>
+            <%= image_tag @part.image.url(:small), :alt => @part.name%>
           </div>
         </div>
       </div>

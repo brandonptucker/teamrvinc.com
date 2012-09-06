@@ -31,7 +31,7 @@
         <div class="control-group">
           <label class="control-label">Current Image</label>
           <div class="controls">
-            <%= image_tag @service.image.url(:small)%>
+            <%= image_tag @service.image.url(:small), :alt => @service.name %>
           </div>
         </div>
       </div>

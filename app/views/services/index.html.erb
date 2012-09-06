@@ -1,37 +1,39 @@
 <h2>Featured Services</h2>
 <hr>
-<div class="row">
-  <% @services.each do |service| %>
-    <div class="span3">
-      <div style="text-align: center;">
-        <a href="<%= service_path(service) %>"><%= image_tag service.image.url(:medium) %></a>
-        <div style="padding: 9px;">
-          <h3>
-            <% if logged_in? %>
-              <span class="label <%= service.active == true ? "label-success" : "label-important"%>"><%= service.active == true ? "Active" : "Inactive"%></span>
+<% @services.each_slice(4) do |slice| %>
+  <div class="row">
+    <% slice.each do |service| %>
+      <div class="span3">
+        <div style="text-align: center;">
+          <a href="<%= service_path(service) %>"><%= image_tag service.image.url(:medium), :alt => service.name %></a>
+          <div style="padding: 9px;">
+            <h3>
+              <% if logged_in? %>
+                <span class="label <%= service.active == true ? "label-success" : "label-important"%>"><%= service.active == true ? "Active" : "Inactive"%></span>
+              <% end %>
+              <%= service.name %>
+            </h3>
+            <% if service.price.zero? %>
+              <p><strong>Free</strong></p>
+            <% else %>
+              <p>Starting at <strong><%= number_to_currency service.price %></strong></p>
             <% end %>
-            <%= service.name %>
-          </h3>
-          <% if service.price.zero? %>
-            <p><strong>Free</strong></p>
-          <% else %>
-            <p>Starting at <strong><%= number_to_currency service.price %></strong></p>
-          <% end %>
-          <% if logged_in? %>
-            <p>
-              <%= link_to "Edit", edit_service_path(service), :class => "btn btn-mini" %>
-              <%= link_to "Destroy",
-                          service_path(service),
-                          :method => :delete,
-                          :confirm => "Are you sure?",
-                          :class => 'btn btn-mini btn-danger' %>
-            </p>
-          <% end %>
+            <% if logged_in? %>
+              <p>
+                <%= link_to "Edit", edit_service_path(service), :class => "btn btn-mini" %>
+                <%= link_to "Destroy",
+                            service_path(service),
+                            :method => :delete,
+                            :confirm => "Are you sure?",
+                            :class => 'btn btn-mini btn-danger' %>
+              </p>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
+<% end %>
 
 <% if logged_in? %>
   <div class="form-actions">

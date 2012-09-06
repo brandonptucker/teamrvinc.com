@@ -76,7 +76,7 @@
           <%= f.fields_for :assets do |asset| %>
             <% unless asset.object.new_record? %>
               <div class="controls">
-                <%= image_tag(asset.object.asset.url(:small)) %>
+                <%= image_tag(asset.object.asset.url(:small), :alt => get_title(@rv)) %>
                 <label class="checkbox">
                   <%= asset.check_box :_destroy %> Destroy
                 </label>

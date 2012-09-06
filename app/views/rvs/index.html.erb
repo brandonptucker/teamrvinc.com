@@ -7,12 +7,12 @@
        <div class="span3">
           <div style="text-align: center;">
             <% if rv.assets.length > 0 %>
-              <a href="<%= rv_path(rv)%>"><%= image_tag rv.assets.first.asset.url(:medium) %></a>
+              <a href="<%= rv_path(rv)%>"><%= image_tag rv.assets.first.asset.url(:medium), :alt => get_title(rv) %></a>
             <% else %>
               <a href="<%= rv_path(rv)%>"><img src="/assets/images_coming_soon_medium.gif"></a>
             <% end %>
             <div style="padding: 9px;">
-              <a href="<%= rv_path(rv) %>" style="color: #333"><h3><%= get_title rv %></h3></a>
+              <a href="<%= rv_path(rv) %>" style="color: #333"><h3><%= get_title(rv) %></h3></a>
               <p><strong><%= number_to_currency rv.price %></strong></p>
               <% if logged_in? %>
                 <p>
