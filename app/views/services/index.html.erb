@@ -4,14 +4,14 @@
   <% @services.each do |service| %>
     <div class="span3">
       <div style="text-align: center;">
-      <% if logged_in? %>
-        <p>
-          <span class="label <%= service.active == true ? "label-success" : "label-important"%>"><%= service.active == true ? "Active" : "Inactive"%></span>
-        </p>
-      <% end %>
-        <%= image_tag service.image.url(:medium) %>
+        <a href="<%= service_path(service) %>"><%= image_tag service.image.url(:medium) %></a>
         <div style="padding: 9px;">
-          <h3><%= service.name %></h3>
+          <h3>
+            <% if logged_in? %>
+              <span class="label <%= service.active == true ? "label-success" : "label-important"%>"><%= service.active == true ? "Active" : "Inactive"%></span>
+            <% end %>
+            <%= service.name %>
+          </h3>
           <p>Starting at <strong><%= number_to_currency service.price %></strong></p>
           <% if logged_in? %>
             <p>

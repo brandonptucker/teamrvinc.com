@@ -12,7 +12,7 @@ TeamRV::Application.routes.draw do
   match "/logout", to: "sessions#destroy", via: :delete
 
   resources :sessions, only: [:new, :create, :destroy]
-  resources :services, except: [:show]
+  resources :services
   resources :parts
   resources :rvs
 end
