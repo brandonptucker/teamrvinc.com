@@ -1,6 +1,12 @@
 <%= form_for @part, :html => { :class => 'form-horizontal' } do |f| %>
   <div class="row">
     <div class="span6">
+      <div class="control-group  <%= @part.errors.has_key?(:condition) ? "error": "" %>">
+        <%= f.label :condition, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.select :condition, options_for_select(["New", "Used"], :selected => @part.condition) %>
+        </div>
+      </div>
       <div class="control-group <%= @part.errors.has_key?(:name) ? "error": "" %>">
         <%= f.label :name, :class => 'control-label' %>
         <div class="controls">
