@@ -30,7 +30,9 @@
 </div>
 
 <% if logged_in? %>
-<%= link_to "New Service", new_service_path, :class => 'btn btn-primary' %>
+  <div class="form-actions">
+    <%= link_to "New Service", new_service_path, :class => 'btn btn-primary' %>
+  </div>
 <% end %>
 
 <div class="row">

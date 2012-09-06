@@ -25,7 +25,9 @@
 </div>
 
 <% if logged_in? %>
-  <%= link_to "New Part", new_part_path, :class => 'btn btn-primary' %>
+  <div class="form-actions">
+    <%= link_to "New Part", new_part_path, :class => 'btn btn-primary' %>
+  </div>
 <% end %>
 
 <div class="row" style="margin-top: 30px;">
