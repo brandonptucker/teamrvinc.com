@@ -12,7 +12,13 @@
     <hr>
     <dl class="dl-horizontal">
       <dt style="text-align: left; margin-bottom: 9px;"><strong>Price</strong></dt>
-      <dd style="margin-bottom: 9px;"><strong><%= number_to_currency @service.price %></strong></dd>
+      <dd style="margin-bottom: 9px;">
+        <% if @service.price.zero? %>
+          <strong>Free</strong>
+        <% else %>
+          Starting at <strong><%= number_to_currency @service.price %></strong>
+        <% end %>
+      </dd>
       <dt style="text-align: left; margin-bottom: 9px;"><strong>Description</strong></dt>
       <dd style="margin-bottom: 9px;"><%= @service.description %></dd>
     </dl>
