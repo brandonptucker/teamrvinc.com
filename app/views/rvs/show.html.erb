@@ -25,7 +25,7 @@
       <dt style="text-align: left; margin-bottom: 9px;"><strong>List Price</strong></dt>
       <dd style="margin-bottom: 9px; text-decoration: line-through;"><%= number_to_currency @rv.list_price %></dd>
       <dt style="text-align: left; margin-bottom: 9px;"><strong>Price</strong></dt>
-      <dd style="margin-bottom: 9px;"><strong><%= number_to_currency @rv.price %></strong></dd>
+      <dd style="margin-bottom: 9px;"><strong><%= number_to_currency @rv.price %>*</strong></dd>
       <% if logged_in? %>
         <dt style="text-align: left; margin-bottom: 9px;"><strong>Cost</strong></dt>
         <dd style="margin-bottom: 9px;"><%= number_to_currency @rv.cost %></dd>
@@ -84,5 +84,11 @@
       </div>
     <button class="btn btn-primary">Submit</button>
   <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <p><small>* Price excludes tax, tag, and title. Price and availability are subject to change without notice. RV may be subject to prior sale. We are not responsible for typographical errors in the price or description.</small></p>
   </div>
 </div>

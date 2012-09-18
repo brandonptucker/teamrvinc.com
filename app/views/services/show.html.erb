@@ -16,7 +16,7 @@
         <% if @service.price.zero? %>
           <strong>Free</strong>
         <% else %>
-          Starting at <strong><%= number_to_currency @service.price %></strong>
+          Starting at <strong><%= number_to_currency @service.price %>*</strong>
         <% end %>
       </dd>
       <dt style="text-align: left; margin-bottom: 9px;"><strong>Description</strong></dt>
@@ -37,4 +37,18 @@
               :confirm => "Are you sure?",
               :class => 'btn btn-danger' %>
   <% end %>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <p>
+      <small>
+        <% if @service.price.zero? %>
+          * Price and availability are subject to change without notice. We are not responsible for typographical errors in the price or description.
+        <% else %>
+          * Price excludes tax. Price and availability are subject to change without notice. We are not responsible for typographical errors in the price or description.
+        <% end %>
+      </small>
+    </p>
+  </div>
 </div>

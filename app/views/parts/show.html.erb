@@ -9,7 +9,7 @@
       <dt style="text-align: left; margin-bottom: 9px;"><strong>List Price</strong></dt>
       <dd style="margin-bottom: 9px; text-decoration: line-through;"><%= number_to_currency @part.list_price %></dd>
       <dt style="text-align: left; margin-bottom: 9px;"><strong>Price</strong></dt>
-      <dd style="margin-bottom: 9px;"><strong><%= number_to_currency @part.price %></strong></dd>
+      <dd style="margin-bottom: 9px;"><strong><%= number_to_currency @part.price %>*</strong></dd>
       <dt style="text-align: left; margin-bottom: 9px;"><strong>Part Number</strong></dt>
       <dd style="margin-bottom: 9px;"><%= @part.part_number %></dd>
       <dt style="text-align: left; margin-bottom: 9px;"><strong>Condition</strong></dt>
@@ -32,4 +32,10 @@
               :confirm => "Are you sure?",
               :class => 'btn btn-danger' %>
   <% end %>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <p><small>* Price excludes tax. Price and availability are subject to change without notice. Part may be subject to prior sale. We are not responsible for typographical errors in the price or description.</small></p>
+  </div>
 </div>
