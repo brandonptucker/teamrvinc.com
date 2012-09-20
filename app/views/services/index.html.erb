@@ -11,7 +11,9 @@
               <% if logged_in? %>
                 <span class="label <%= service.active == true ? "label-success" : "label-important"%>"><%= service.active == true ? "Active" : "Inactive"%></span>
               <% end %>
-              <%= service.name %>
+              <a href="<%= service_path(service) %>" style="color: #333">
+                <%= service.name %>
+              </a>
             </h3>
             <% if service.price.zero? %>
               <p><strong>Free</strong></p>
