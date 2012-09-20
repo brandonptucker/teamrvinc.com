@@ -4,7 +4,7 @@ set :rvm_type, :system
 
 require "bundler/capistrano"
 
-set :application, "test.teamrvinc.com"
+set :application, "teamrvinc.com"
 set :repository,  "~/Sites/#{application}/.git"
 
 set :user, "webadmin"
