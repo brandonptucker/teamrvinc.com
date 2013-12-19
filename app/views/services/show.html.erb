@@ -1,3 +1,6 @@
+<% content_for :title, "Team RV - "+ @service.name %>
+<% content_for :description, @service.description %>
+
 <div class="row">
   <div class="span6" style="padding-bottom: 18px;">
     <%= image_tag @service.image.url(:large), :alt => @service.name %>
