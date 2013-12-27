@@ -22,7 +22,8 @@ end
 
 gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'
-gem 'paperclip'
+gem 'paperclip', '3.5.2'
+gem 'paperclip-compression', '~> 0.3.4'
 
 gem 'google-analytics-rails'
 
