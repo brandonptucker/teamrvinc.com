@@ -1,5 +1,6 @@
-<% content_for :title, "Team RV - New and Used " + @categories.collect {|category| category.pluralize}.to_sentence %>
-<% content_for :description, "We offer RVs from the following manufacturers: " + @makes.to_sentence %>
+<% content_for :title, "Team RV - Browse New and Used RVs For Sale" %>
+<% content_for :description, "We offer New and Used " +
+ @categories.collect {|category| category.pluralize}.to_sentence %>
 
 <% @category_rv_map.each_with_index do |(category, rvs), index| %>
   <h2 style="<%= index > 0 ? "padding-top: 30px;" : "" %>"><%= category.pluralize %></h2>

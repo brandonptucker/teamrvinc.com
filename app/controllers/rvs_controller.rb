@@ -7,7 +7,6 @@ class RVsController < ApplicationController
                         .group_by(&:category)
                         .sort { |a,b| b[1].length <=> a[1].length }
     @categories = RV.uniq.pluck(:category)
-    @makes = RV.uniq.pluck(:make)
 
     respond_to do |format|
       format.html # index.html.erb
