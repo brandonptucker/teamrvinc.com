@@ -9,8 +9,8 @@
       <div class="span3">
         <div style="text-align: center;">
           <a href="<%= part_path(part) %>"><%= image_tag part.image.url(:medium), :alt => part.name %></a>
-          <div style="padding: 9px;">
-            <h3><a href="<%= part_path(part) %>" style="color: #333"><%= part.name %></a></h3>
+          <div style="padding: 9px 0px 9px 0px">
+            <h4><a href="<%= part_path(part) %>" style="color: #333"><%= part.name %></a></h4>
             <p><strong><%= number_to_currency part.price %></strong></p>
             <% if logged_in? %>
               <p>
