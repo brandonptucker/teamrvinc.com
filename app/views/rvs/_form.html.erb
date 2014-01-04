@@ -67,6 +67,22 @@
           <%= f.text_area :description, :class => 'text_area' %>
         </div>
       </div>
+      <div>
+        <%= f.fields_for :tag do |tag_field| %>
+          <div class="control-group">
+            <%= f.label :tag, :class => 'control-label' %>
+            <div class="controls">
+              <%= tag_field.text_field :title, :value => @rv.tag[:title], :class => 'text_field' %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :color, :class => 'control-label' %>
+            <div class="controls">
+              <%= tag_field.select :color, options_for_select(["Gray", "Green", "Yellow", "Red", "Blue", "Black"], :selected => @rv.tag[:color]) %>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
 
     <% if @rv.assets.count > 0 %>

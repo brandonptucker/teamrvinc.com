@@ -10,10 +10,10 @@
         <div style="text-align: center;">
           <a href="<%= service_path(service) %>"><%= image_tag service.image.url(:medium), :alt => service.name %></a>
           <div style="padding: 9px 0px 9px 0px">
+            <% if logged_in? %>
+              <span class="label <%= service.active == true ? "label-success" : "label-important"%>"><%= service.active == true ? "Active" : "Inactive"%></span>
+            <% end %>
             <h4>
-              <% if logged_in? %>
-                <span class="label <%= service.active == true ? "label-success" : "label-important"%>"><%= service.active == true ? "Active" : "Inactive"%></span>
-              <% end %>
               <a href="<%= service_path(service) %>" style="color: #333">
                 <%= service.name %>
               </a>

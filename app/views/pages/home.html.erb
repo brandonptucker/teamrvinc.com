@@ -54,6 +54,9 @@
           <a href="<%= rv_path(rv)%>"><img src="/assets/images_coming_soon_medium.gif"></a>
         <% end %>
         <div style="padding: 9px 0px 9px 0px">
+          <% if !rv.tag[:title].nil? && !rv.tag[:title].empty? %>
+            <span class="label <%= get_class_for_color(rv.tag[:color]) %>"><%= rv.tag[:title] %></span>
+          <% end %>
           <a href="<%= rv_path(rv) %>" style="color: #333"><h4><%= get_title rv %></h4></a>
           <p><strong><%= number_to_currency rv.price %></strong></p>
         </div>

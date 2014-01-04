@@ -6,10 +6,10 @@
     <%= image_tag @service.image.url(:large), :alt => @service.name %>
   </div>
   <div class="span6">
+    <% if logged_in? %>
+      <span class="label <%= @service.active == true ? "label-success" : "label-important"%>"><%= @service.active == true ? "Active" : "Inactive"%></span>
+    <% end %>
     <h2>
-      <% if logged_in? %>
-        <span class="label <%= @service.active == true ? "label-success" : "label-important"%>"><%= @service.active == true ? "Active" : "Inactive"%></span>
-      <% end %>
       <%= @service.name %>
      </h2>
     <hr>

@@ -22,6 +22,9 @@
       </div>
   </div>
   <div class="span6">
+    <% if !@rv.tag[:title].nil? && !@rv.tag[:title].empty? %>
+      <span class="label <%= get_class_for_color(@rv.tag[:color]) %>"><%= @rv.tag[:title] %></span>
+    <% end %>
     <h2><%= get_title(@rv) %></h2>
     <hr>
     <dl class="dl-horizontal">
