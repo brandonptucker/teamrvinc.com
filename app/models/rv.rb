@@ -7,4 +7,15 @@ class RV < ActiveRecord::Base
   validates :year, :length => { :is => 4}
   validates :length, :length => { :is => 2}
   serialize :tag, Hash
+
+  def get_default_payment()
+  	interest_rate = 6.0
+  	years = self.condition == "New" ? 10 : 7
+  	
+  	r = (6.0/12)/100
+  	n = years * 12
+  	p = self.price
+
+  	(r * p) / (1 - ((1 + r) ** -n))
+  end
 end
