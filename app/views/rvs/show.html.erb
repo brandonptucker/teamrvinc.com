@@ -32,6 +32,13 @@
       <dd style="margin-bottom: 9px; text-decoration: line-through;"><%= number_to_currency @rv.list_price %></dd>
       <dt style="text-align: left; margin-bottom: 9px;"><strong>Price</strong></dt>
       <dd style="margin-bottom: 9px;"><strong><%= number_to_currency @rv.price %>*</strong></dd>
+      <dt style="text-align: left; margin-bottom: 9px;"><strong>Estimated Payment</strong></dt>
+      <dd style="margin-bottom: 9px;">
+        <strong><%= number_to_currency @rv.get_default_payment %>** / month</strong><br>
+        <small><%= @rv.get_default_term %> Years @ <%= @rv.get_default_interest_rate %>% APR (<%= number_to_currency @rv.get_default_down_payment %> Down Payment)
+        </small><br>
+        <a href="#myModal" role="button" class="btn btn-primary" data-toggle="modal">Calculate another payment</a>
+      </dd>
       <% if logged_in? %>
         <dt style="text-align: left; margin-bottom: 9px;"><strong>Cost</strong></dt>
         <dd style="margin-bottom: 9px;"><%= number_to_currency @rv.cost %></dd>
@@ -62,7 +69,6 @@
                 :confirm => "Are you sure?",
                 :class => 'btn btn-danger' %>
   <% end %>
-  <a href="#myModal" role="button" class="btn btn-primary" data-toggle="modal">Payment Calculator</a>
 </div>
  
 <!-- Modal -->
@@ -76,29 +82,35 @@
       <div class="control-group">
         <label class="control-label" for="">Price</label>
         <div class="controls">
-          <input id="price" type="number" step="any" value="<%= number_with_precision(@rv.price, precision: 2) %>" required>
+          <input id="price" type="number" min=1 step="any" value="<%= number_with_precision(@rv.price, precision: 2) %>" required>
           <span class="help-inline"></span>
         </div>
       </div>
       <div class="control-group">
-        <label class="control-label" for="">Years</label>
+        <label class="control-label" for="">Down Payment</label>
         <div class="controls">
-          <input id="years" type="number" step="any" value="<%= @rv.condition == "New" ? 10 : 7 %>" required>
+          <input id="downPayment" type="number" min=1 step="any" value="<%= number_with_precision(@rv.get_default_down_payment, precision: 2) %>" required>
+          <span class="help-inline"></span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="">Term <small>(Years)</small></label>
+        <div class="controls">
+          <input id="term" type="number" min=1 max=20 step="any" value="<%= @rv.get_default_term %>" required>
           <span class="help-inline"></span>
         </div>
       </div>
       <div class="control-group">
         <label class="control-label" for="">Interest Rate</label>
         <div class="controls">
-          <input id="interestRate" type="number" step="any" value="6.0" required>
+          <input id="rate" type="number" min=1 step="any" value="5.9" required>
           <span class="help-inline"></span>
         </div>
       </div>
-      <hr>
       <div class="control-group">
-        <label class="control-label" for="">Monthly Payment</label>
+        <label class="control-label" for="">Payment</label>
         <div class="controls">
-          <p id="payment" class="lead">$<%= number_with_precision(@rv.get_default_payment, precision: 2) %></p>
+          <p id="payment" class="lead"><%= number_to_currency(number_with_precision(@rv.get_default_payment, precision: 2)) %></p>
         </div>
       </div>
     </form>
@@ -140,6 +152,6 @@
 
 <div class="row">
   <div class="span12">
-    <p><small>* Price excludes tax, tag, and title. Price and availability are subject to change without notice. RV may be subject to prior sale. We are not responsible for typographical errors in the price or description.</small></p>
+    <p><small>* Price excludes tax, tag, and title. Price and availability are subject to change without notice. RV may be subject to prior sale. We are not responsible for typographical errors in the price or description. ** Annual percentage rate (APR), loan term, and interest rate may vary based upon applicant's FICO score, credit history, or age of vehicle.</small></p>
   </div>
 </div>

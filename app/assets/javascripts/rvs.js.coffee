@@ -5,15 +5,14 @@
 c = (r, n, p) ->
 	(r * p) / (1 - Math.pow((1 + r), -n))
 
-recalculatePayment = (price, years, interestRate) ->
-	r = (interestRate / 12) / 100
-	n = years * 12
-	p = price
+recalculatePayment = (price, downPayment, term, rate) ->
+	r = (rate / 12) / 100
+	n = term * 12
+	p = price - downPayment
 	c(r, n, p).toFixed(2)
 
 $ ->
-	$('input#price, input#years, input#interestRate').keyup ->
-		
+	$('input#price, input#downPayment, input#term, input#rate').keyup ->
 		if $(this)[0].checkValidity()
 			$(this).parents('div.control-group').removeClass('error')
 			$(this).next().text('')
@@ -21,14 +20,17 @@ $ ->
 			$(this).parents('div.control-group').addClass('error')
 			$(this).next().text(this.validationMessage)
 
-		if $('input#price')[0].checkValidity() && $('input#years')[0].checkValidity() && $('input#interestRate')[0].checkValidity()
+		if $('input#price')[0].checkValidity() && 
+			 $('input#downPayment')[0].checkValidity() && 
+			 $('input#term')[0].checkValidity() && 
+			 $('input#rate')[0].checkValidity()
 			$('button#recalculate').prop('disabled', false)
 		else 
 			$('button#recalculate').prop('disabled', true)
 
 	$('#recalculate').click ->
-		payment = recalculatePayment($('#price').val(), $('#years').val(), $('#interestRate').val())
-		if payment == 'Infinity' || payment == 'NaN'
-			$('#payment').text('N/A')
-		else
-			$('#payment').text("$" + payment)
+		payment = recalculatePayment($('#price').val(), 
+																 $('#downPayment').val(), 
+																 $('#term').val(), 
+																 $('#rate').val())
+		$('#payment').text('$' + payment)

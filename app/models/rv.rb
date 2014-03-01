@@ -8,14 +8,35 @@ class RV < ActiveRecord::Base
   validates :length, :length => { :is => 2}
   serialize :tag, Hash
 
+  def get_default_interest_rate()
+    5.9
+  end
+
+  def get_default_term()
+    case self.price
+    when 0..10000.00
+      7
+    when 10000.01..25000.00
+      10
+    when 25000.01..50000.00
+      15
+    else
+      20
+    end
+  end
+
+  def get_default_down_payment()
+    self.price * 0.10
+  end
+
   def get_default_payment()
-  	interest_rate = 6.0
-  	years = self.condition == "New" ? 10 : 7
   	
-  	r = (6.0/12)/100
-  	n = years * 12
-  	p = self.price
+  	r = (get_default_interest_rate() / 12) / 100
+  	n = get_default_term() * 12
+  	p = self.price - get_default_down_payment()
 
   	(r * p) / (1 - ((1 + r) ** -n))
   end
+
+
 end
