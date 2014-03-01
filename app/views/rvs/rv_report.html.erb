@@ -12,7 +12,7 @@
       <th>Stock Number</th>
       <th>List Price</th>
       <th>Price</th>
-      <th>Cost</th>
+      <th class="hidden-print">Cost</th>
     </tr>
   </thead>
   <tbody>
@@ -26,7 +26,7 @@
         <td><%= rv.stock_number %></td>
         <td><%= number_to_currency rv.list_price %></td>
         <td><%= number_to_currency rv.price %></td>
-        <td><%= number_to_currency rv.cost %></td>
+        <td class="hidden-print"><%= number_to_currency rv.cost %></td>
       </tr>
     <% end %>
   </tbody>
