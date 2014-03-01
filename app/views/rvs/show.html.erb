@@ -37,7 +37,7 @@
         <strong><%= number_to_currency @rv.get_default_payment %>** / month</strong><br>
         <small><%= @rv.get_default_term %> Years @ <%= @rv.get_default_interest_rate %>% APR (<%= number_to_currency @rv.get_default_down_payment %> Down Payment)
         </small><br>
-        <a href="#myModal" role="button" class="btn btn-primary" data-toggle="modal">Calculate another payment</a>
+        <a href="#myModal" role="button" class="btn btn-primary btn-small" data-toggle="modal">Calculate another payment</a>
       </dd>
       <% if logged_in? %>
         <dt style="text-align: left; margin-bottom: 9px;"><strong>Cost</strong></dt>
