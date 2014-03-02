@@ -2,7 +2,7 @@
 <% content_for :description, @rv.description %>
 
 <div class="row">
-  <div class="span6">
+  <div class="span6 rv-details-ipad-fix">
       <div id="carousel" class="carousel slide">
         <div class="carousel-inner">
           <% if @rv.assets.length > 0 %>
@@ -21,7 +21,7 @@
         <a class="right carousel-control" href="#carousel" data-slide="next">›</a>
       </div>
   </div>
-  <div class="span6">
+  <div class="span6 rv-details-ipad-fix">
     <% if !@rv.tag[:title].nil? && !@rv.tag[:title].empty? %>
       <span class="label <%= get_class_for_color(@rv.tag[:color]) %>"><%= @rv.tag[:title] %></span>
     <% end %>
