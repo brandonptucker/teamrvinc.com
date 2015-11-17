@@ -38,5 +38,8 @@ class RV < ActiveRecord::Base
   	(r * p) / (1 - ((1 + r) ** -n))
   end
 
+  def get_max_assets()
+    15
+  end
 
 end

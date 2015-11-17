@@ -32,7 +32,7 @@ class RVsController < ApplicationController
     @rv = RV.new
     @categories = RV.uniq.pluck(:category)
     @makes = RV.uniq.pluck(:make)
-    8.times { @rv.assets.build }
+    @rv.get_max_assets.times { @rv.assets.build }
 
     respond_to do |format|
       format.html # new.html.erb
@@ -45,7 +45,7 @@ class RVsController < ApplicationController
     @rv = RV.find(params[:id])
     @categories = RV.uniq.pluck(:category)
     @makes = RV.uniq.pluck(:make)
-    (8 - @rv.assets.length).times { @rv.assets.build }
+    (@rv.get_max_assets - @rv.assets.length).times { @rv.assets.build }
   end
 
   # POST /rvs
@@ -61,7 +61,7 @@ class RVsController < ApplicationController
         if @rv.errors.any?
           flash.now[:error] = "Sorry, the RV could not be created! Please correct the errors below and create the RV again."
         end
-        (8 - @rv.assets.length).times { @rv.assets.build }
+        (@rv.get_max_assets - @rv.assets.length).times { @rv.assets.build }
         format.html { render action: "new" }
         format.json { render json: @rv.errors, status: :unprocessable_entity }
       end

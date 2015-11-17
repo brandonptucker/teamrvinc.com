@@ -103,7 +103,7 @@
       </div>
     <% end %>
 
-    <% if @rv.assets.count < 8 %>
+    <% if @rv.assets.count < @rv.get_max_assets() %>
     <div class="span6">
       <div class="control-group">
         <label for="rv_assets" class="control-label">New Images</label>
