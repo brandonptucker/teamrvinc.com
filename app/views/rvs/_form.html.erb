@@ -44,7 +44,7 @@
         </div>
       </div>
       <div class="control-group <%= @rv.errors.has_key?(:price) ? "error": "" %>">
-        <%= f.label :price, :class => 'control-label' %>
+        <%= f.label :price, 'Drive Out Price', :class => 'control-label' %>
         <div class="controls">
           <%= f.text_field :price, :class => 'text_field' %>
         </div>
