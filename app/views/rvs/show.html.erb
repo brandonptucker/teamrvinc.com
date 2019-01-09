@@ -39,7 +39,7 @@
         <strong><%= number_to_currency @rv.get_default_payment %>** / month</strong><br>
         <small><%= @rv.get_default_term %> Years @ <%= @rv.get_default_interest_rate %>% APR (<%= number_to_currency @rv.get_default_down_payment %> Down Payment)
         </small><br>
-        <a href="#myModal" role="button" class="btn btn-primary btn-small hidden-phone" data-toggle="modal">Calculate another payment</a>
+        <a href="#myModal" role="button" class="btn btn-primary btn-small" data-toggle="modal">Calculate another payment</a>
       </dd>
       <% if logged_in? %>
         <dt style="text-align: left; margin-bottom: 9px;"><strong>Cost</strong></dt>
@@ -72,15 +72,15 @@
                 :class => 'btn btn-danger' %>
   <% end %>
 </div>
- 
+
 <!-- Modal -->
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h2 id="myModalLabel">Payment Calculator</h2>
+    <h2 id="myModalLabel" style="margin: 0px">Payment Calculator</h2>
   </div>
   <div class="modal-body">
-    <form class="form-horizontal">
+    <form class="form-horizontal" style="margin-bottom: 0px">
       <div class="control-group">
         <label class="control-label" for="">Price</label>
         <div class="controls">
@@ -109,10 +109,10 @@
           <span class="help-inline"></span>
         </div>
       </div>
-      <div class="control-group">
+      <div class="control-group" style="margin-bottom: 0px">
         <label class="control-label" for="">Payment</label>
         <div class="controls">
-          <p id="payment" class="lead"><%= number_to_currency(number_with_precision(@rv.get_default_payment, precision: 2)) %></p>
+          <p id="payment" class="lead" style="margin-bottom: 0px"><%= number_to_currency(number_with_precision(@rv.get_default_payment, precision: 2)) %></p>
         </div>
       </div>
     </form>
