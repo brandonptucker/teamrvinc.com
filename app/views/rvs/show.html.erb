@@ -2,6 +2,66 @@
 <% content_for :description, @rv.description %>
 
 <div class="row">
+  <div class="span12">
+    <% if !@rv.tag[:title].nil? && !@rv.tag[:title].empty? %>
+      <span class="pull-right-sm mt-20-sm label <%= get_class_for_color(@rv.tag[:color]) %>"><%= @rv.tag[:title] %></span>
+    <% end %>
+    <h2><%= get_title(@rv) %></h2>
+    <hr>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span8 rv-details-ipad-fix">
+      <div id="carousel" class="carousel slide">
+        <div class="carousel-inner">
+          <% if @rv.assets.length > 0 %>
+            <% @rv.assets.each_with_index do |asset, index| %>
+              <div class="item <%= index == 0 ? "active" : "" %>">
+                <%= image_tag asset.asset.url(:large), :alt => get_title(@rv) %>
+              </div>
+            <% end %>
+          <% else %>
+            <div class="item active">
+              <img src="/assets/images_coming_soon_large.jpg">
+            </div>
+          <% end %>
+        </div>
+        <a class="left carousel-control" href="#carousel" data-slide="prev">‹</a>
+        <a class="right carousel-control" href="#carousel" data-slide="next">›</a>
+      </div>
+  </div>
+  <div class="span4 rv-details-ipad-fix">
+    <dl class="dl-horizontal">
+      <dt style="text-align: left; margin-bottom: 9px;"><strong>List Price</strong></dt>
+      <dd style="margin-bottom: 9px; text-decoration: line-through;"><%= number_to_currency @rv.list_price %></dd>
+      <dt style="text-align: left; margin-bottom: 9px;"><strong><a rel="popover" data-toggle="popover" data-placement="bottom" data-trigger="click hover" title="" data-content="<ul><li>GA Sales Tax (7%)</li><li>Tag & Title Registration</li><li>Delivery Fees</li><li>Document Fees</li><li>Propane Tanks Filled</li><li>Sewer Hose</li><li>Drinking Water Hose</li><li>30/15 Electrical Adapter</li><li>Customer Orientation</li><li>Pre-Delivery Inspection</li></ul>" data-original-title="The <strong>Drive Out Price</strong> includes the following:">Drive Out Price</a></strong></dt>
+      <dd style="margin-bottom: 18px;"><p style="font-size: 24.5px; font-weight: bold; color: #0088cc;"><%= number_to_currency(@rv.price, precision: 0) %>*</p></dd>
+      <dt style="text-align: left; margin-bottom: 9px;"><strong>Estimated Payment</strong></dt>
+      <dd style="margin-bottom: 9px;">
+        <strong><%= number_to_currency @rv.get_default_payment %> / mo**</strong>
+        <a href="#myModal" role="button" class="btn btn-primary btn-small" data-toggle="modal"><i class="icon-plus"></i></a>
+      </dd>
+      <% if logged_in? %>
+        <dt style="text-align: left; margin-bottom: 9px;"><strong>Cost</strong></dt>
+        <dd style="margin-bottom: 9px;"><%= number_to_currency @rv.cost %></dd>
+      <% end %>
+      <dt style="text-align: left; margin-bottom: 9px;"><strong>Stock Number</strong></dt>
+      <dd style="margin-bottom: 9px;"><%= @rv.stock_number %></dd>
+      <dt style="text-align: left; margin-bottom: 9px;"><strong>Length</strong></dt>
+      <dd style="margin-bottom: 9px;"><%= @rv.length %></dd>
+      <dt style="text-align: left; margin-bottom: 9px;"><strong>Category</strong></dt>
+      <dd style="margin-bottom: 9px;"><%= @rv.category %></dd>
+      <dt style="text-align: left; margin-bottom: 9px;"><strong>Condition</strong></dt>
+      <dd style="margin-bottom: 9px;"><%= @rv.condition %></dd>
+      <dt style="text-align: left; margin-bottom: 9px;"><strong>Description</strong></dt>
+      <dd style="margin-bottom: 9px;"><%= simple_format(@rv.description) %></dd>
+    </dl>
+  </div>
+</div>
+
+<!--
+<div class="row">
   <div class="span6 rv-details-ipad-fix">
       <div id="carousel" class="carousel slide">
         <div class="carousel-inner">
@@ -13,7 +73,7 @@
             <% end %>
           <% else %>
             <div class="item active">
-              <img src="/assets/images_coming_soon_large.gif">
+              <img src="/assets/images_coming_soon_large.jpg">
             </div>
           <% end %>
         </div>
@@ -31,8 +91,6 @@
       <dt style="text-align: left; margin-bottom: 9px;"><strong>List Price</strong></dt>
       <dd style="margin-bottom: 9px; text-decoration: line-through;"><%= number_to_currency @rv.list_price %></dd>
       <dt style="text-align: left; margin-bottom: 9px;"><strong><a rel="popover" data-toggle="popover" data-placement="bottom" data-trigger="click hover" title="" data-content="<ul><li>GA Sales Tax (7%)</li><li>Tag & Title Registration</li><li>Delivery Fees</li><li>Document Fees</li><li>Propane Tanks Filled</li><li>Sewer Hose</li><li>Drinking Water Hose</li><li>30/15 Electrical Adapter</li><li>Customer Orientation</li><li>Pre-Delivery Inspection</li></ul>" data-original-title="The <strong>Drive Out Price</strong> includes the following:">Drive Out Price</a></strong></dt>
-      <!--
-      -->
       <dd style="margin-bottom: 9px;"><strong><%= number_to_currency @rv.price %>*</strong></dd>
       <dt style="text-align: left; margin-bottom: 9px;"><strong>Estimated Payment</strong></dt>
       <dd style="margin-bottom: 9px;">
@@ -58,6 +116,7 @@
     </dl>
   </div>
 </div>
+-->
 
 <div class="form-actions">
   <%= link_to "Back",
@@ -155,6 +214,6 @@
 
 <div class="row">
   <div class="span12">
-    <p><small>* Effective 12/01/2015: Price includes tax, tag, and title. Price and availability are subject to change without notice. RV may be subject to prior sale. We are not responsible for typographical errors in the price or description. ** Annual percentage rate (APR), loan term, and interest rate may vary based upon applicant's FICO score, credit history, or age of vehicle.</small></p>
+    <p><small>* Effective 12/01/2015: Price includes tax, tag, and title. Price and availability are subject to change without notice. RV may be subject to prior sale. We are not responsible for typographical errors in the price or description. ** Payment estimated with <%= @rv.get_default_term %> Years @ <%= @rv.get_default_interest_rate %>% APR (<%= number_to_currency @rv.get_default_down_payment %> Down Payment). Annual percentage rate (APR), loan term, and interest rate may vary based upon applicant's FICO score, credit history, or age of vehicle.</small></p>
   </div>
 </div>

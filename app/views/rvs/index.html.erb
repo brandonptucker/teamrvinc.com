@@ -13,7 +13,7 @@
             <% if rv.assets.length > 0 %>
               <a href="<%= rv_path(rv)%>"><%= image_tag rv.assets.first.asset.url(:medium), :alt => get_title(rv) %></a>
             <% else %>
-              <a href="<%= rv_path(rv)%>"><img src="/assets/images_coming_soon_medium.gif"></a>
+              <a href="<%= rv_path(rv)%>"><img src="/assets/images_coming_soon_medium.jpg"></a>
             <% end %>
             <div style="padding: 9px 0px 9px 0px">
               <% if !rv.tag[:title].nil? && !rv.tag[:title].empty? %>
@@ -30,7 +30,7 @@
                             :confirm => "Are you sure?",
                             :class => 'btn btn-mini btn-danger' %>
                 </p>
-              <% end %>  
+              <% end %>
             </div>
           </div>
         </div>
